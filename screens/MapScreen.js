@@ -55,6 +55,7 @@ export default function MapScreen() {
             coordinate={currLocation}
             title={"Current Location"}
             description={"You are here!"}
+            image={require('../assets/avatar.png')}
           />
         ) : null}
       </MapView>
