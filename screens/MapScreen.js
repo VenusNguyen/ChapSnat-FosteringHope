@@ -51,7 +51,7 @@ export default function MapScreen()  {
   };
   // const [setIsModalVisible, setIsModalVisible] = React.useState(false); 
   // const handleModal = () => setIsModalVisible(() => !setIsModalVisible);
-  //adding 
+  //add
   return (
     <>
     <MapView
