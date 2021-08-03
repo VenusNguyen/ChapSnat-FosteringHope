@@ -8,6 +8,7 @@ import FriendsScreen from "./screens/FriendsScreen";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import VideoScreen from "./screens/VideoScreen";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import firebase from "@firebase/app";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
@@ -36,6 +37,7 @@ function App() {
                 <Stack.Screen name="Chat" component={ChatScreen} />
                 <Stack.Screen name="Friends" component={FriendsScreen} />
                 <Stack.Screen name="Profile" component={ProfileScreen} />
+                <Stack.Screen name="Video" component={VideoScreen} />
               </>
             ) : (
               <>

@@ -1,36 +1,31 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Colors from "../constants/Colors";
-import { TouchableOpacity, Text, StyleSheet, View, Button} from "react-native";  //SafeAreaView, 
+import { StyleSheet, View, Text, Button } from "react-native";
 import * as Location from "expo-location";
-import MapView, { Marker } from "react-native-maps"; 
+import MapView, { Callout, Marker } from "react-native-maps";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../constants/Colors";
 import BottomSheet from "react-native-gesture-bottom-sheet";
-
+import { ListItem, Avatar } from "react-native-elements";
+import {Video, AVPlaybackStatus }from "expo-av";
 const LOS_ANGELES_REGION = {
   latitude: 34.0522,
   longitude: -118.2437,
   latitudeDelta: 0.0922,
   longitudeDelta: 0.0421,
 };
-const KID_IN_THE_SPOTLIGHT = {
-  latitude: 34.18277,
-  longitude: -118.30566,
-};
-  const Images = [
-    {image: require("../assets/avatar.png")}, 
-    {image: require("../assets/house.jpeg")},
-  ];
-export default function MapScreen()  {
+
+export default function MapScreen({navigation}) {
   const [currLocation, setCurrLocation] = useState(null);
   const mapView = useRef(null);
+  const bottomSheet = useRef(null);
 
-  const bottomSheet = useRef();
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
+        console.error("Permission to access location was denied");
         return;
       }
 
@@ -38,6 +33,7 @@ export default function MapScreen()  {
       setCurrLocation(location.coords);
     })();
   }, []);
+
   const goToCurrLocation = () => {
     mapView?.current.animateToRegion(
       {
@@ -49,56 +45,121 @@ export default function MapScreen()  {
       1000
     );
   };
-  // const [setIsModalVisible, setIsModalVisible] = React.useState(false); 
-  // const handleModal = () => setIsModalVisible(() => !setIsModalVisible);
-  //add
+
   return (
     <>
-    <MapView
-      ref={mapView}
-      style={styles.map}
-      initialRegion={LOS_ANGELES_REGION}
-    >
-       {currLocation ? (
+      <MapView
+        ref={mapView}
+        style={styles.map}
+        initialRegion={LOS_ANGELES_REGION}
+      >
+        {currLocation ? (
           <Marker
             coordinate={currLocation}
-            title={"Current Location"}
-            description={"You are here!"}
-            image={Images[0].image}
+            // title={"Current Location"}
+            // description={"You are here!"}
+            // <Callout onPress={}></>
+            image={require('../assets/avatar.png')}
+            onPress={() => bottomSheet.current.show()}
           />
         ) : null}
-        <Marker
-        coordinate={KID_IN_THE_SPOTLIGHT}
-        title={"Organization"}
-        description={"Info"}
-        image={Images[1].image}
-          />
-    </MapView> 
-      <BottomSheet 
-        hasDraggableIcon 
-        ref={bottomSheet} 
-        height={500}
-        renderContent={this.renderInner}
-      />
+      </MapView>
+
+      <EditBottomSheet
+        bottomSheet={bottomSheet}
+        navigation = {navigation}
+      >
+
+      </EditBottomSheet>
+
       {currLocation ? (
-      <View style={styles.locateButtonContainer}>
-        <TouchableOpacity
-          style={styles.locateButton}
-          onPress={() => bottomSheet.current.show()}
-        >
-        <Ionicons
+        <View style={styles.locateButtonContainer}>
+          <TouchableOpacity
+            style={styles.locateButton}
+            onPress={goToCurrLocation}
+          >
+            <Ionicons
               name={"navigate"}
               size={40}
               color={Colors.snapblue}
               style={{ marginTop: 5, marginLeft: 3 }}
             />
-          <Text style={styles.text}>modal??</Text>
-          <Text style={styles.text}>inside</Text>
-        </TouchableOpacity>
-      </View>
+          </TouchableOpacity>
+        </View>
       ) : null}
-   </>
+    </>
   );
+}
+function EditBottomSheet(props){
+
+const video = useRef(null);
+const [status, setStatus] =useState({});
+
+  return (
+    <BottomSheet 
+        hasDraggableIcon 
+        ref={props.bottomSheet} 
+        height={500}
+        sheetBackgroundColor={"white"}
+        backgroundColor={"tranparent"}
+      >
+        <View style={styles.bottomSheetView}>
+            <ListItem>
+              <Avatar source={require("../assets/chat_placeholder.jpg")} size="medium"/>
+              <View>
+                <Text>Kids In The Spotlight</Text>
+                <Text>Arts and Craft Resource</Text>
+              </View>
+            </ListItem>
+            
+            <ListItem>
+              <Ionicons name={"location"} size={18} />
+              <Text>145 S Glenoaks Blvd UNIT 124, Burbank, CA</Text>
+            </ListItem>
+
+            <ListItem>
+              <Ionicons name={"call"} size={18} />
+              <Text>(818) 441-1513</Text>
+
+              <Ionicons name={"globe"} size={18} />
+              <Text>kitsinc.org</Text>
+            </ListItem>
+          
+            <ListItem style={styles.centered}>
+
+              <TouchableOpacity style={{ ...styles.openButton, ...styles.favoriteButton}}>
+                <Text style={styles.favoriteText}>Favorite</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={{ ...styles.openButton, ...styles.sendButton}}>
+                <Text style={styles.textStyle}>Send</Text>
+              </TouchableOpacity>
+
+            </ListItem>
+
+            <Text style={styles.bottomSheetText}>Options</Text>
+
+            <View style={styles.centered}>
+              <TouchableOpacity style={{ ...styles.openButton}}
+              onPress={() => {
+                props.navigation.navigate("VideoScreen");
+              }}
+              >
+                <Text style={styles.textStyle}>Video</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={{ ...styles.openButton}}>
+                <Text style={styles.textStyle}>AI Chat</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={{ ...styles.openButton}}>
+                <Text style={styles.textStyle}>Bitmoji Direction</Text>
+              </TouchableOpacity>
+            </View>
+
+          </View>
+      </BottomSheet>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -116,32 +177,214 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: colors.snapyellow,
   },
-  button: {
-    height: 50,
-    width: 150,
-    backgroundColor: "#140078",
+  bottomSheetView: {
+    backgroundColor: "transparent",
+    // borderRadius: 20,
+    // padding: 50,
+    // alignItems: "center",
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
+    // elevation: 5,
+  },
+  bottomSheetText: {
+    marginBottom: 20,
+  },
+  openButton: {
+    height: 45,
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 20,
-    shadowColor: "#8559da",
-    shadowOpacity: 0.7,
-    shadowOffset: {
-      height: 4,
-      width: 4,
-    },
-    shadowRadius: 5,
-    elevation: 6,
+    marginBottom: 15,
+    width: 300,
+    borderRadius: 15,
+    backgroundColor: "transparent",
+    backgroundColor: Colors.snapblue,
   },
-  text: {
+  textStyle: {
     color: "white",
-    fontWeight: "600",
+    fontWeight: "bold",
   },
-  container: {
-    flex: 1,
-    justifyContent: "center",
+  favoriteButton: {
+    width: 160,
+    borderRadius: 15,
+    backgroundColor: "transparent",
+    backgroundColor: Colors.lightgray,
+  },
+  favoriteText: {
+    color: Colors.snapgray,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  sendButton: {
+    width: 190,
+    borderRadius: 30,
+    backgroundColor: "transparent",
+    backgroundColor: Colors.snapblue,
+  },
+  centered: {
     alignItems: "center",
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
+/////////////////////////////////
+// import React, { useRef, useState, useEffect } from "react";
+// import Colors from "../constants/Colors";
+// import { TouchableOpacity, Text, StyleSheet, View, Button} from "react-native";  //SafeAreaView, 
+// import * as Location from "expo-location";
+// import MapView, { Marker } from "react-native-maps"; 
+// import { Ionicons } from "@expo/vector-icons";
+// import colors from "../constants/Colors";
+// import BottomSheet from "react-native-gesture-bottom-sheet";
+
+// const LOS_ANGELES_REGION = {
+//   latitude: 34.0522,
+//   longitude: -118.2437,
+//   latitudeDelta: 0.0922,
+//   longitudeDelta: 0.0421,
+// };
+// const KID_IN_THE_SPOTLIGHT = {
+//   latitude: 34.18277,
+//   longitude: -118.30566,
+// };
+//   const Images = [
+//     {image: require("../assets/avatar.png")}, 
+//     {image: require("../assets/house.jpeg")},
+//   ];
+// export default function MapScreen()  {
+//   const [currLocation, setCurrLocation] = useState(null);
+//   const mapView = useRef(null);
+
+//   const bottomSheet = useRef();
+//   useEffect(() => {
+//     (async () => {
+//       let { status } = await Location.requestForegroundPermissionsAsync();
+//       if (status !== "granted") {
+//         setErrorMsg("Permission to access location was denied");
+//         return;
+//       }
+
+//       let location = await Location.getCurrentPositionAsync({});
+//       setCurrLocation(location.coords);
+//     })();
+//   }, []);
+//   const goToCurrLocation = () => {
+//     mapView?.current.animateToRegion(
+//       {
+//         latitude: currLocation.latitude,
+//         longitude: currLocation.longitude,
+//         latitudeDelta: 0.0922,
+//         longitudeDelta: 0.0421,
+//       },
+//       1000
+//     );
+//   };
+//   // const [setIsModalVisible, setIsModalVisible] = React.useState(false); 
+//   // const handleModal = () => setIsModalVisible(() => !setIsModalVisible);
+//   //add
+//   return (
+//     <>
+//     <MapView
+//       ref={mapView}
+//       style={styles.map}
+//       initialRegion={LOS_ANGELES_REGION}
+//     >
+//        {currLocation ? (
+//           <Marker
+//             coordinate={currLocation}
+//             title={"Current Location"}
+//             description={"You are here!"}
+//             image={Images[0].image}
+//           />
+//         ) : null}
+//         <Marker
+//         coordinate={KID_IN_THE_SPOTLIGHT}
+//         title={"Organization"}
+//         description={"Info"}
+//         image={Images[1].image}
+//           />
+//     </MapView> 
+//       <BottomSheet 
+//         hasDraggableIcon 
+//         ref={bottomSheet} 
+//         height={500}
+//         renderContent={this.renderInner}
+//       />
+//       {currLocation ? (
+//       <View style={styles.locateButtonContainer}>
+//         <TouchableOpacity
+//           style={styles.locateButton}
+//           onPress={() => bottomSheet.current.show()}
+//         >
+//         <Ionicons
+//               name={"navigate"}
+//               size={40}
+//               color={Colors.snapblue}
+//               style={{ marginTop: 5, marginLeft: 3 }}
+//             />
+//           <Text style={styles.text}>modal??</Text>
+//           <Text style={styles.text}>inside</Text>
+//         </TouchableOpacity>
+//       </View>
+//       ) : null}
+//    </>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   map: {
+//     ...StyleSheet.absoluteFillObject,
+//   },
+//   locateButtonContainer: {
+//     position: "absolute",
+//     bottom: 20,
+//     right: 20,
+//   },
+//   locateButton: {
+//     height: 50,
+//     width: 50,
+//     borderRadius: 25,
+//     backgroundColor: colors.snapyellow,
+//   },
+//   button: {
+//     height: 50,
+//     width: 150,
+//     backgroundColor: "#140078",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     borderRadius: 20,
+//     shadowColor: "#8559da",
+//     shadowOpacity: 0.7,
+//     shadowOffset: {
+//       height: 4,
+//       width: 4,
+//     },
+//     shadowRadius: 5,
+//     elevation: 6,
+//   },
+//   text: {
+//     color: "white",
+//     fontWeight: "600",
+//   },
+//   container: {
+//     flex: 1,
+//     justifyContent: "center",
+//     alignItems: "center",
+//   },
+// });
 
 // export default Example;
 //////////////////////////
