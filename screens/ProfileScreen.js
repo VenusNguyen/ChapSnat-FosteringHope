@@ -241,7 +241,7 @@ function EditModal(props) {
         Alert.alert("Modal has been closed.");
       }}
     >
-      <View style={styles.centeredView}>
+      <View>
         <View style={styles.modalView}>
           <Text style={styles.modalText}>Change your name:</Text>
           <TextInput autoFocus={true} onChangeText={setNewName} />
@@ -325,7 +325,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 50,
-    marginTop: 300,
+    marginTop: 250,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {

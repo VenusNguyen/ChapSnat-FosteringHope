@@ -64,7 +64,7 @@ export default function ChatScreen({ route }) {
 
     const uploadTask = firebase
       .storage()
-      .ref(user.uid + "/" + filename)
+      .ref(currUser.uid + "/" + filename)
       .put(blob);
     // set progress state
     uploadTask.on("state_changed", (snapshot) => {

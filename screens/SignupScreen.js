@@ -50,11 +50,12 @@ export default function SignupScreen() {
 
   return (
     <View style={styles.container}>
+
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Welcome to Snapchat</Text>
       </View>
+
       <View style={styles.inputContainer}>
-        <Text>Name:</Text>
         <TextInput
           style={styles.inputs}
           placeholder="Name"
@@ -62,8 +63,8 @@ export default function SignupScreen() {
           onChangeText={setName}
         />
       </View>
+      
       <View style={styles.inputContainer}>
-        <Text>Email:</Text>
         <TextInput
           style={styles.inputs}
           placeholder="Email"
@@ -73,10 +74,9 @@ export default function SignupScreen() {
       </View>
 
       <View style={styles.inputContainer}>
-        <Text>Password (6+ characters):</Text>
         <TextInput
           style={styles.inputs}
-          placeholder="Password"
+          placeholder="Password (6+ characters)"
           secureTextEntry={true}
           onChangeText={setPassword}
         />
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     paddingTop: 180,
-    backgroundColor: "white",
+    backgroundColor: Colors.snapyellow,
   },
   imageContainer: {
     width: 300,
