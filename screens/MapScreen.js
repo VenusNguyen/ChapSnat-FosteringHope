@@ -19,7 +19,6 @@ const LOS_ANGELES_REGION = {
 export default function MapScreen() {
   const [currLocation, setCurrLocation] = useState(null);
   const mapView = useRef(null);
-
   const bottomSheet = useRef(null);
 
   useEffect(() => {
@@ -66,9 +65,36 @@ export default function MapScreen() {
         ) : null}
       </MapView>
 
-      <BottomSheet 
+      <EditBottomSheet
+        bottomSheet={bottomSheet}
+      ></EditBottomSheet>
+
+      {currLocation ? (
+        <View style={styles.locateButtonContainer}>
+          <TouchableOpacity
+            style={styles.locateButton}
+            onPress={goToCurrLocation}
+          >
+            <Ionicons
+              name={"navigate"}
+              size={40}
+              color={Colors.snapblue}
+              style={{ marginTop: 5, marginLeft: 3 }}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : null}
+    </>
+  );
+}
+
+
+function EditBottomSheet(props) {
+
+  return (
+    <BottomSheet 
         hasDraggableIcon 
-        ref={bottomSheet} 
+        ref={props.bottomSheet} 
         height={500}
         sheetBackgroundColor={"white"}
         backgroundColor={"tranparent"}
@@ -125,24 +151,7 @@ export default function MapScreen() {
 
           </View>
       </BottomSheet>
-
-      {currLocation ? (
-        <View style={styles.locateButtonContainer}>
-          <TouchableOpacity
-            style={styles.locateButton}
-            onPress={goToCurrLocation}
-          >
-            <Ionicons
-              name={"navigate"}
-              size={40}
-              color={Colors.snapblue}
-              style={{ marginTop: 5, marginLeft: 3 }}
-            />
-          </TouchableOpacity>
-        </View>
-      ) : null}
-    </>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
