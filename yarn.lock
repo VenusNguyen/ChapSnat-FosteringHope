@@ -5267,6 +5267,11 @@ react-native-elements@^3.4.2:
     react-native-ratings "8.0.4"
     react-native-size-matters "^0.3.1"
 
+react-native-gesture-bottom-sheet@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-bottom-sheet/-/react-native-gesture-bottom-sheet-1.0.6.tgz#5e4c8e660c54a13bf6137780add6145049bbf999"
+  integrity sha512-Xiz0xzxMO0rvDgi2Uk4ERdCbHV6UzxRL5DWywu69HUnBK3t6gch5TugWAixY1DkIQlzPD1A5pBcou6h9iPyukA==
+
 react-native-gesture-handler@^1.10.3:
   version "1.10.3"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.10.3.tgz#942bbf2963bbf49fa79593600ee9d7b5dab3cfc0"
