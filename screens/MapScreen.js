@@ -8,7 +8,6 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "../constants/Colors";
 import BottomSheet from "react-native-gesture-bottom-sheet";
 import { ListItem, Avatar } from "react-native-elements";
-import {Video, AVPlaybackStatus }from "expo-av";
 const LOS_ANGELES_REGION = {
   latitude: 34.0522,
   longitude: -118.2437,
@@ -20,6 +19,7 @@ export default function MapScreen({navigation}) {
   const [currLocation, setCurrLocation] = useState(null);
   const mapView = useRef(null);
   const bottomSheet = useRef(null);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -60,18 +60,23 @@ export default function MapScreen({navigation}) {
             // description={"You are here!"}
             // <Callout onPress={}></>
             image={require('../assets/avatar.png')}
-            onPress={() => bottomSheet.current.show()}
+            onPress={() => 
+            bottomSheet.current.show(),
+            setShow(true)
+            }
+
           />
         ) : null}
       </MapView>
-
-      <EditBottomSheet
-        bottomSheet={bottomSheet}
-        navigation = {navigation}
-      >
-
-      </EditBottomSheet>
-
+      {show ? (
+          <EditBottomSheet
+          bottomSheet={bottomSheet}
+          navigation={navigation}
+          setShow={setShow}
+        >
+        </EditBottomSheet>
+      ) : null}
+      
       {currLocation ? (
         <View style={styles.locateButtonContainer}>
           <TouchableOpacity
@@ -90,10 +95,8 @@ export default function MapScreen({navigation}) {
     </>
   );
 }
+//d
 function EditBottomSheet(props){
-
-const video = useRef(null);
-const [status, setStatus] =useState({});
 
   return (
     <BottomSheet 
@@ -142,7 +145,8 @@ const [status, setStatus] =useState({});
             <View style={styles.centered}>
               <TouchableOpacity style={{ ...styles.openButton}}
               onPress={() => {
-                props.navigation.navigate("VideoScreen");
+                props.setShow(false);
+                props.navigation.navigate("Video");
               }}
               >
                 <Text style={styles.textStyle}>Video</Text>
@@ -159,6 +163,7 @@ const [status, setStatus] =useState({});
 
           </View>
       </BottomSheet>
+
   )
 }
 
