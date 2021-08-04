@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Colors from "../constants/Colors";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, LogBox } from "react-native";
 import * as Location from "expo-location";
 import MapView, { Callout, Marker } from "react-native-maps";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -8,6 +8,9 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "../constants/Colors";
 import BottomSheet from "react-native-gesture-bottom-sheet";
 import { ListItem, Avatar } from "react-native-elements";
+
+
+// import RBSheet from "react-native-raw-bottom-sheet";
 const LOS_ANGELES_REGION = {
   latitude: 34.0522,
   longitude: -118.2437,
@@ -19,8 +22,10 @@ export default function MapScreen({navigation}) {
   const [currLocation, setCurrLocation] = useState(null);
   const mapView = useRef(null);
   const bottomSheet = useRef(null);
-  const [show, setShow] = useState(false);
-
+  // const [show, setShow] = useState(false);
+  // useEffect(() => {
+  //   LogBox.ignoreLogs(["Animated: 'useNativeDriver'"]);
+  // },);
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -32,6 +37,7 @@ export default function MapScreen({navigation}) {
       let location = await Location.getCurrentPositionAsync({});
       setCurrLocation(location.coords);
     })();
+    LogBox.ignoreLogs(["Animated: 'useNativeDriver'"]);
   }, []);
 
   const goToCurrLocation = () => {
@@ -60,22 +66,22 @@ export default function MapScreen({navigation}) {
             // description={"You are here!"}
             // <Callout onPress={}></>
             image={require('../assets/avatar.png')}
-            onPress={() => 
-            bottomSheet.current.show(),
-            setShow(true)
-            }
+            onPress={() => {
+            bottomSheet.current.show()
+            // setShow(true)
+            }}
 
           />
         ) : null}
       </MapView>
-      {show ? (
+      {/* {show ? ( */}
           <EditBottomSheet
           bottomSheet={bottomSheet}
           navigation={navigation}
-          setShow={setShow}
+          // setShow={setShow}
         >
         </EditBottomSheet>
-      ) : null}
+       {/* ) : null}  */}
       
       {currLocation ? (
         <View style={styles.locateButtonContainer}>
@@ -95,7 +101,7 @@ export default function MapScreen({navigation}) {
     </>
   );
 }
-//d
+
 function EditBottomSheet(props){
 
   return (
@@ -145,8 +151,9 @@ function EditBottomSheet(props){
             <View style={styles.centered}>
               <TouchableOpacity style={{ ...styles.openButton}}
               onPress={() => {
-                props.setShow(false);
+                props.bottomSheet.current.close();
                 props.navigation.navigate("Video");
+                // BottomSheet.dismiss();
               }}
               >
                 <Text style={styles.textStyle}>Video</Text>

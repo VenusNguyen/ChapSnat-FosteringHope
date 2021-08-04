@@ -31,9 +31,12 @@
     "react-native-gifted-chat": "^0.16.3",
     "react-native-maps": "0.28.0",
     "react-native-multiple-select-list": "^1.0.4",
+    "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-screens": "^3.4.0",
     "react-native-video": "^5.1.1",
-    "react-native-web": "~0.13.12"
+    "react-native-web": "~0.13.12",
+    "react-native-webview": "^11.6.5",
+    "react-youtube-iframe": "^0.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
