@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet, Button } from 'react-native';
-import { Video, AVPlaybackStatus } from 'expo-av';
+import { Video} from 'expo-av';
 
 export default function VideoScreen() {
   const video = React.useRef(null);
@@ -18,6 +18,7 @@ export default function VideoScreen() {
         resizeMode="contain"
         isLooping
         onPlaybackStatusUpdate={status => setStatus(() => status)}
+        
       />
       <View style={styles.buttons}>
         <Button
