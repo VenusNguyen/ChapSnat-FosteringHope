@@ -91,7 +91,7 @@ export default function MapScreen({navigation}) {
                 latitude: data.coordinate.latitude,
                 longitude: data.coordinate.longitude,
               }}
-              image={require("../assets/avatar.png")}
+              image={{ uri: data.icon }}
               onPress={() => bottomSheet.current.show()}
             />
           );
@@ -187,7 +187,7 @@ function EditBottomSheet(props) {
             style={{ ...styles.openButton }}
             onPress={() => {
               props.bottomSheet.current.close();
-              
+              props.navigation.navigate("Video");
             }}
           >
             <Text style={styles.textStyle}>About Us</Text>
