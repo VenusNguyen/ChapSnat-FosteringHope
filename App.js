@@ -12,6 +12,7 @@ import VideoScreen from "./screens/VideoScreen";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import firebase from "@firebase/app";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import VideoScreen from "./screens/VideoScreen";
 
 const Stack = createStackNavigator();
 
