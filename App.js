@@ -11,6 +11,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import firebase from "@firebase/app";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import VideoScreen from "./screens/VideoScreen";
 
 const Stack = createStackNavigator();
 
@@ -36,6 +37,7 @@ function App() {
                 <Stack.Screen name="Chat" component={ChatScreen} />
                 <Stack.Screen name="Friends" component={FriendsScreen} />
                 <Stack.Screen name="Profile" component={ProfileScreen} />
+                <Stack.Screen name="Video" component={VideoScreen} />
               </>
             ) : (
               <>
