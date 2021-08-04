@@ -17,23 +17,25 @@ const LOS_ANGELES_REGION = {
   longitudeDelta: 0.0421,
 };
 
-export default function MapScreen() {
+export default function MapScreen({navigation}) {
   const [currLocation, setCurrLocation] = useState(null);
   const mapView = useRef(null);
   const bottomSheet = useRef(null);
   const [resources, setResources] = useState([]);
 
   useEffect(() => {
-      db.collection("Resources").get().then((querySnapshot) => {
-      let newResources = [];
-      querySnapshot.forEach((doc) => {
-        let newResource = { ...doc.data() };
-        newResource.id = doc.id;
-        newResources.push(newResource);
-        return newResource;
+    db.collection("Resources")
+      .get()
+      .then((querySnapshot) => {
+        let newResources = [];
+        querySnapshot.forEach((doc) => {
+          let newResource = { ...doc.data() };
+          newResource.id = doc.id;
+          newResources.push(newResource);
+          return newResource;
+        });
+        setResources(newResources);
       });
-      setResources(newResources);
-    });
   }, []);
 
   useEffect(() => {
@@ -47,7 +49,6 @@ export default function MapScreen() {
       let location = await Location.getCurrentPositionAsync({});
       setCurrLocation(location.coords);
     })();
-
   }, []);
 
   //a hacky way to get rid of the 'useNativeDriver' warning
@@ -77,25 +78,29 @@ export default function MapScreen() {
         {currLocation ? (
           <Marker
             coordinate={currLocation}
-            image={require('../assets/avatar.png')}
+            image={require("../assets/avatar.png")}
             onPress={() => bottomSheet.current.show()}
           />
         ) : null}
 
-        {resources.map(data => {
-          console.log(data.coordinate);
-          <Marker
-            key={data.id}
-            coordinate={data.coordinate}
-            image={require('../assets/avatar.png')}
-            onPress={() => bottomSheet.current.show()}
-          />
+        {resources.map((data) => {
+          return (
+            <Marker
+              key={data.id}
+              coordinate={{
+                latitude: data.coordinate.latitude,
+                longitude: data.coordinate.longitude,
+              }}
+              image={require("../assets/avatar.png")}
+              onPress={() => bottomSheet.current.show()}
+            />
+          );
         })}
-
       </MapView>
 
       <EditBottomSheet
         bottomSheet={bottomSheet}
+        navigation={navigation}
       ></EditBottomSheet>
 
       {currLocation ? (
@@ -117,83 +122,99 @@ export default function MapScreen() {
   );
 }
 
-
 function EditBottomSheet(props) {
-
   return (
-    <BottomSheet 
-        hasDraggableIcon 
-        ref={props.bottomSheet} 
-        height={500}
-        sheetBackgroundColor={"white"}
-        backgroundColor={"tranparent"}
-      >
-        <View style={styles.bottomSheetView}>
-            <ListItem>
-              <Avatar source={require("../assets/chat_placeholder.jpg")} size="medium"/>
-              <ListItem.Content>
-                <ListItem.Title style={styles.title}>
-                  <Text>
-                    Kids In The Spotlight
-                  </Text>
-                </ListItem.Title>
-                <ListItem.Subtitle style={styles.subtitle}>
-                  <Text>
-                    Arts and Craft Resource
-                  </Text>
-                </ListItem.Subtitle>
-              </ListItem.Content>
-            </ListItem>
-            
-            <ListItem>
-              <Ionicons name={"location"} size={18} />
-              <Text>145 S Glenoaks Blvd UNIT 124, Burbank, CA</Text>
-            </ListItem>
+    <BottomSheet
+      hasDraggableIcon
+      ref={props.bottomSheet}
+      height={500}
+      sheetBackgroundColor={"white"}
+      backgroundColor={"tranparent"}
+    >
+      <View style={styles.bottomSheetView}>
+        <ListItem>
+          <Avatar
+            source={require("../assets/chat_placeholder.jpg")}
+            size="medium"
+          />
+          <ListItem.Content>
+            <ListItem.Title style={styles.title}>
+              <Text>Kids In The Spotlight</Text>
+            </ListItem.Title>
+            <ListItem.Subtitle style={styles.subtitle}>
+              <Text>Arts and Craft Resource</Text>
+            </ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
 
-            <ListItem>
-              <Ionicons name={"call"} size={18} />
-              <Text>(818) 441-1513</Text>
+        <ListItem>
+          <Ionicons name={"location"} size={18} />
+          <Text>145 S Glenoaks Blvd UNIT 124, Burbank, CA</Text>
+        </ListItem>
 
-              <Ionicons name={"globe"} size={18} />
-              <Text>kitsinc.org</Text>
-            </ListItem>
-          
-            <ListItem style={styles.centered}>
+        <ListItem>
+          <Ionicons name={"call"} size={18} />
+          <Text>(818) 441-1513</Text>
 
-              <TouchableOpacity style={{ ...styles.openButton, ...styles.favoriteButton}}>
-                <Ionicons name={"heart-outline"} size={18} style={styles.iconMarginLeft}/>
-                <Text style={styles.favoriteText}>Favorite</Text>
-              </TouchableOpacity>
+          <Ionicons name={"globe"} size={18} />
+          <Text>kitsinc.org</Text>
+        </ListItem>
 
-              <TouchableOpacity style={{ ...styles.openButton, ...styles.sendButton}}>
-                <Text style={styles.textStyle}>Send</Text>
-                <Ionicons name={"send"} style={styles.iconMarginRight}/>
-              </TouchableOpacity>
+        <ListItem style={styles.centered}>
+          <TouchableOpacity
+            style={{ ...styles.openButton, ...styles.favoriteButton }}
+          >
+            <Ionicons
+              name={"heart-outline"}
+              size={18}
+              style={styles.iconMarginLeft}
+            />
+            <Text style={styles.favoriteText}>Favorite</Text>
+          </TouchableOpacity>
 
-            </ListItem>
+          <TouchableOpacity
+            style={{ ...styles.openButton, ...styles.sendButton }}
+          >
+            <Text style={styles.textStyle}>Send</Text>
+            <Ionicons name={"send"} style={styles.iconMarginRight} />
+          </TouchableOpacity>
+        </ListItem>
 
-            <Text style={styles.bottomSheetText}>Options</Text>
+        <Text style={styles.bottomSheetText}>Options</Text>
 
-            <View style={styles.centered}>
-              <TouchableOpacity style={{ ...styles.openButton}}>
-                <Text style={styles.textStyle}>About Us</Text>
-                <Ionicons name={"information-circle-outline"} size={18} style={styles.iconMarginRight}/>
-              </TouchableOpacity>
+        <View style={styles.centered}>
+          <TouchableOpacity
+            style={{ ...styles.openButton }}
+            onPress={() => {
+              props.bottomSheet.current.close();
+              
+            }}
+          >
+            <Text style={styles.textStyle}>About Us</Text>
+            <Ionicons
+              name={"information-circle-outline"}
+              size={18}
+              style={styles.iconMarginRight}
+            />
+          </TouchableOpacity>
 
-              <TouchableOpacity style={{ ...styles.openButton}}>
-                <Text style={styles.textStyle}>AI Chat</Text>
-                <Ionicons name="chatbubble-ellipses-outline" size={18} style={styles.iconMarginRight}/>
-              </TouchableOpacity>
+          <TouchableOpacity style={{ ...styles.openButton }}>
+            <Text style={styles.textStyle}>AI Chat</Text>
+            <Ionicons
+              name="chatbubble-ellipses-outline"
+              size={18}
+              style={styles.iconMarginRight}
+            />
+          </TouchableOpacity>
 
-              <TouchableOpacity style={{ ...styles.openButton}}>
-                <Text style={styles.textStyle}>Bitmoji Direction</Text>
-                <Ionicons name={"walk"} size={18} style={styles.iconMarginRight}/>
-              </TouchableOpacity>
-            </View>
-
-          </View>
-      </BottomSheet>
-  )
+          <TouchableOpacity style={{ ...styles.openButton }}>
+            <Text style={styles.textStyle}>Bitmoji Direction</Text>
+            <Ionicons name={"walk"} size={18} style={styles.iconMarginRight} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </BottomSheet>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -273,5 +294,5 @@ const styles = StyleSheet.create({
   iconMarginRight: {
     marginLeft: 7,
     color: "white",
-  }
+  },
 });
