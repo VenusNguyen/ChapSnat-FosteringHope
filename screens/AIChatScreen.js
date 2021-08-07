@@ -1,25 +1,25 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
-// import db from "../firebase";
-// import firebase from "@firebase/app";
+import db from "../firebase";
+import firebase from "@firebase/app";
 
 export default function ChatScreen({ route }) {
   const [messages, setMessages] = useState([]);
   //   const { currUser } = route.params;
   const [currUser, setCurrUser] = useState(null);
 
-//   useEffect(() => {
-//     // Download curr user info
-//     // (and listen for future updates)
-//     // (in case curr user decides to update their profile info)
+  useEffect(() => {
+    // Download curr user info
+    // (and listen for future updates)
+    // (in case curr user decides to update their profile info)
     
-//     db
-//     .collection("Users")
-//     .doc(firebase.auth().currentUser.uid)
-//     .onSnapshot((userSnapshot) => {
-//         setCurrUser({ uid: userSnapshot.id });
-//     });
-//   }, []);
+    db
+    .collection("Users")
+    .doc(firebase.auth().currentUser.uid)
+    .onSnapshot((userSnapshot) => {
+        setCurrUser({ uid: userSnapshot.id });
+    });
+  }, []);
 
   useEffect(() => {
     setMessages([
