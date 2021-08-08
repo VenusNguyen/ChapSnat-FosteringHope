@@ -11,7 +11,7 @@ export default function ChatScreen({ route }) {
   const [messages, setMessages] = useState([]);
 
   const { chatName, currUser } = route.params;
-
+////
   useEffect(() => {
     let unsubscribeFromNewSnapshots = db
       .collection("Chats")
@@ -28,6 +28,7 @@ export default function ChatScreen({ route }) {
     return function cleanupBeforeUnmounting() {
       unsubscribeFromNewSnapshots();
     };
+    
   }, []);
 
   const onSend = useCallback(

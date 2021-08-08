@@ -1,24 +1,24 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 
-export default function App() {
+export default function AIChatScreen({}) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     setMessages([
       {
         _id: 1,
-        text: "Hello developer",
+        text: "Hello there. How are you doing?",
         createdAt: new Date(),
         user: {
           _id: 2,
-          name: "React Native",
+          name: "Kids In The Spotlight",
           avatar: "https://placeimg.com/140/140/any",
         },
       },
       {
         _id: 2,
-        text: "Hello developer there",
+        text: "Hello Kids In The Spotlight...",
         createdAt: new Date(),
         user: {
           _id: 1,
@@ -32,7 +32,7 @@ export default function App() {
   const botSend = useCallback(() => {
     let newmessage = {
       _id: messages.length + 1,
-      text: "hello",
+      text: "Our resources are provided in the Maps screen.\nWhere you can find food banks, shelter, and arts program! ",
       createdAt: new Date(),
       user: {
         _id: 2,
@@ -58,7 +58,7 @@ export default function App() {
       onSend={(messages) => onSend(messages)}
       user={{
         _id: 1,
-        name: "Jenny",
+        name: "Kids In The Spotlight",
         avatar: "https://placeimg.com/140/140/any",
       }}
       showUserAvatar={true}
@@ -66,36 +66,3 @@ export default function App() {
     />
   );
 }
-// import React, { useState, useEffect } from "react";
-// import Colors from "../constants/Colors";
-// import {
-//   ImageBackground,
-//   StyleSheet,
-//   ScrollView,
-//   Text,
-//   View,
-//   StatusBar,
-// } from "react-native";
-// import { TouchableOpacity } from "react-native-gesture-handler";
-// import { Ionicons } from "@expo/vector-icons";
-
-// export default function SpotlightScreen() {
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.text}>
-//         This is the spotlight screen! 
-//       </Text>
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "white",
-//     paddingTop: StatusBar.currentHeight,
-//   },
-//   text: {
-//     fontSize: 50,
-//   },
-// });

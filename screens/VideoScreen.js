@@ -1,10 +1,13 @@
-import * as React from "react";
-import { View, StyleSheet, Button } from "react-native";
-import { Video, AVPlaybackStatus } from "expo-av";
+import React, {useEffect} from "react";
+import { View, StyleSheet} from "react-native";
+import { Video, Audio} from "expo-av";
 
 export default function VideoScreen() {
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
+  useEffect (() => {
+    Audio.setAudioModeAsync({ playsInSilentModeIOS: true})
+  }, [])
   return (
     <View style={styles.container}>
       <Video
@@ -17,6 +20,7 @@ export default function VideoScreen() {
         resizeMode="contain"
         isLooping
         onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+        // ignoreSilentSwitch="ignore"
       />
     </View>
   );

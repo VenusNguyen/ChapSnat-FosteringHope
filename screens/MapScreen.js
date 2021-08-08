@@ -201,7 +201,13 @@ function EditBottomSheet(props) {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity style={{ ...styles.openButton }}>
+          <TouchableOpacity style={{ ...styles.openButton }}
+            style={{...styles.openButton}}
+            onPress={() => {
+              props.bottomSheet.current.close();
+              props.navigation.navigate("AIChat"); 
+            }}
+            >
             <Text style={styles.textStyle}>AI Chat</Text>
             <Ionicons
               name="chatbubble-ellipses-outline"

@@ -9,10 +9,11 @@ import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import VideoScreen from "./screens/VideoScreen";
+import AIChatScreen from "./screens/AIChatScreen";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import firebase from "@firebase/app";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
-import VideoScreen from "./screens/VideoScreen";
+
 
 const Stack = createStackNavigator();
 
@@ -39,6 +40,7 @@ function App() {
                 <Stack.Screen name="Friends" component={FriendsScreen} />
                 <Stack.Screen name="Profile" component={ProfileScreen} />
                 <Stack.Screen name="Video" component={VideoScreen} />
+                <Stack.Screen name="AIChat" component={AIChatScreen} />
               </>
             ) : (
               <>
