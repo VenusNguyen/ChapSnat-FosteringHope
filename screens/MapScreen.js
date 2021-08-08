@@ -78,7 +78,7 @@ export default function MapScreen({ navigation }) {
         {currLocation ? (
           <Marker
             coordinate={currLocation}
-            image={require("../assets/avatar.png")}
+            image={require("../assets/my-bitmoji.png")}
             onPress={() => bottomSheet.current.show()}
           />
         ) : null}
