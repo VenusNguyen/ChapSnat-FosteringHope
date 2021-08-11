@@ -2,7 +2,7 @@
 
 # Team Members
 
-### [Venus Nguyen] - (linkedin.com/in/venus-nguyen)
+[Venus Nguyen] - (linkedin.com/in/venus-nguyen)
 ### Jake Mata - [linkedin.com/in/jakelouismata] 
 ### Terran Lawrence- [linkedin.com/in/terran-ray-lawrence-2128b920a]
 ### Shari Walker - [linkedin.com/in/sharielizabethwalker]
