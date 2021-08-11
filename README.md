@@ -2,12 +2,12 @@
 
 # Team Members
 
-[Venus Nguyen](linkedin.com/in/venus-nguyen) - linkedin
-### Jake Mata - [linkedin.com/in/jakelouismata] 
-### Terran Lawrence- [linkedin.com/in/terran-ray-lawrence-2128b920a]
-### Shari Walker - [linkedin.com/in/sharielizabethwalker]
-### Luis Cortez - [linkedin.com/in/luis-felipe-cortez-a10b041a6]
-### Me(Ana) - [linkedin.com/in/ana-lopez-38573a20a]
+[Venus Nguyen](linkedin.com/in/venus-nguyen) - linkedin.com/in/venus-nguyen
+[Jake Mata](linkedin.com/in/jakelouismata) - linkedin.com/in/jakelouismata
+[Terran Lawrence][linkedin.com/in/terran-ray-lawrence-2128b920a] - linkedin.com/in/terran-ray-lawrence-2128b920a
+[Shari Walker][linkedin.com/in/sharielizabethwalker] -linkedin.com/in/sharielizabethwalker
+[Luis Cortez][linkedin.com/in/luis-felipe-cortez-a10b041a6] -linkedin.com/in/luis-felipe-cortez-a10b041a6
+[Me(Ana)][linkedin.com/in/ana-lopez-38573a20a] - linkedin.com/in/ana-lopez-38573a20a
 
 ## Project Details
 For this project we mainly focused on the Maps of the App. We've added custome made icons for users to have the chance to view the help they can get. They have access to food bank, shelters, and arts program. Which includes the organization that has been helping us with the app, "Kids In The Spotlight." There's an introduction video of the organization that explains what they do and what they provide for them. In the AI Chat it tells them what they provide for them. 
