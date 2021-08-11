@@ -16,10 +16,7 @@ For this project we mainly focused on the Maps of the App. We've added custome m
 https://drive.google.com/drive/u/0/folders/1FUXEcIDps7c-P9wyzC_L5Hi-mgHUfG9A
 
 ![IMG_3650](https://user-images.githubusercontent.com/81542559/128968919-d49b4bdf-af0c-411c-b797-f57fd2add9d5.GIF)
-
 ![IMG_3651](https://user-images.githubusercontent.com/81542559/128969013-a758ab47-24a2-4ded-9851-a19253ad84da.GIF)
-
-
 ![IMG_3652](https://user-images.githubusercontent.com/81542559/128969033-f78b3654-d692-4098-91e0-3556d2b01818.GIF)
 ![IMG_3654](https://user-images.githubusercontent.com/81542559/128969035-486e8a8c-c5c2-4ade-b7ac-292326480089.GIF)
 
