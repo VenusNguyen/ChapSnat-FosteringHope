@@ -3,10 +3,10 @@
 # Team Members
 
 [Venus Nguyen](linkedin.com/in/venus-nguyen) - linkedin.com/in/venus-nguyen  <br />
-[Jake Mata](linkedin.com/in/jakelouismata) - linkedin.com/in/jakelouismata __
-[Terran Lawrence](linkedin.com/in/terran-ray-lawrence-2128b920a) - linkedin.com/in/terran-ray-lawrence-2128b920a __
-[Shari Walker](linkedin.com/in/sharielizabethwalker) -linkedin.com/in/sharielizabethwalker __
-[Luis Cortez](linkedin.com/in/luis-felipe-cortez-a10b041a6) -linkedin.com/in/luis-felipe-cortez-a10b041a6 __
+[Jake Mata](linkedin.com/in/jakelouismata) - linkedin.com/in/jakelouismata <br />
+[Terran Lawrence](linkedin.com/in/terran-ray-lawrence-2128b920a) - linkedin.com/in/terran-ray-lawrence-2128b920a <br />
+[Shari Walker](linkedin.com/in/sharielizabethwalker) -linkedin.com/in/sharielizabethwalker <br />
+[Luis Cortez](linkedin.com/in/luis-felipe-cortez-a10b041a6) -linkedin.com/in/luis-felipe-cortez-a10b041a6 <br />
 [Me(Ana)](linkedin.com/in/ana-lopez-38573a20a) - linkedin.com/in/ana-lopez-38573a20a
 
 ## Project Details
