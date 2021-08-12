@@ -29,8 +29,9 @@
 # Installation, Set up, & Run
 
 ## Install
->1. Clone this repo to your personal device. Checkout [this documentation](https://help.github.com/en/articles/cloning-a-repository) for more information on how to do this.
->2. You might want to set up your database to look something what is shown below, then put it inside the fireside.js file.
+>1. Clone this repo to your personal device. (You can checkout [this documentation](https://help.github.com/en/articles/cloning-a-repository) for more information on how to do this.)
+>2. Set up your database to look something like what is shown below, then put it inside the fireside.js file. (You can checkout [FireBase documentation](https://firebase.google.com/docs/web/setup) for more information on how to set this up.)
+
 
 ![map-overview](assets/firebase-example.gif)
 
