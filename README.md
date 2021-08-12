@@ -26,7 +26,7 @@
 ![map-overview](assets/AI-chat.gif)
 
 
-# Installation, Setup, & Run
+# Installation, Set up, & Run
 
 ## Install
 >1. Clone this repo to your personal device. Checkout [this documentation](https://help.github.com/en/articles/cloning-a-repository) for more information on how to do this.
