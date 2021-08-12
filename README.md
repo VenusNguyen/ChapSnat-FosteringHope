@@ -42,6 +42,7 @@ Note: Download [Expo Go](https://expo.dev/client) on your phone for better exper
 ```
 cd ChapSnat-FosteringHope
 yarn install
+git checkout main
 ```
 
 ## Run
