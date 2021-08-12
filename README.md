@@ -41,7 +41,13 @@ Note: Download [Expo Go](https://expo.dev/client) on your phone for better exper
 
 ```
 cd ChapSnat-FosteringHope
+```
+
+```
 yarn install
+```
+
+```
 git checkout main
 ```
 
@@ -53,10 +59,10 @@ expo start
 
 # Technologies Used
 
->* [React Native](https://reactnative.dev/docs/getting-started)
->* [React Native Elements](https://reactnativeelements.com/docs/)
->* [Expo](https://docs.expo.dev/index.html)
->* [FireBase](https://firebase.google.com/docs)
+* [React Native](https://reactnative.dev/docs/getting-started)
+* [React Native Elements](https://reactnativeelements.com/docs/)
+* [Expo](https://docs.expo.dev/index.html)
+* [FireBase](https://firebase.google.com/docs)
 
 # Project Team Members
 
@@ -72,6 +78,6 @@ expo start
 
 #  Acknowledgements
 
->* [ChapSnat Template](https://github.com/Snap-Engineering-Academy-2021/chapsnat-sandbox)
->* [React Native Gifted Chat](https://github.com/FaridSafi/react-native-gifted-chat)
->* [Reactive Gesture Bottom Sheet](https://www.npmjs.com/package/react-native-gesture-bottom-sheet)
+* [ChapSnat Template](https://github.com/Snap-Engineering-Academy-2021/chapsnat-sandbox)
+* [React Native Gifted Chat](https://github.com/FaridSafi/react-native-gifted-chat)
+* [Reactive Gesture Bottom Sheet](https://www.npmjs.com/package/react-native-gesture-bottom-sheet)
