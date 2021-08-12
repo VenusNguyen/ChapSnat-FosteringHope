@@ -85,18 +85,8 @@ export default function ChatScreen({ route }) {
     return downloadURL;
   };
 
-  // Replace if using SNAP MINI...
+  
   const renderAccessory = null;
-  // const renderAccessory = (props) => (
-  //   <View>
-  //     <Button
-  //       onPress={() => {
-  //         alert("Launching Snap Mini...");
-  //       }}
-  //       title={"Launch Snap Mini"}
-  //     />
-  //   </View>
-  // );
 
   const renderActions = (props) => {
     return (
