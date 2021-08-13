@@ -168,6 +168,9 @@ export default function ChatScreen({ route }) {
         _id: currUser.uid,
         name: currUser.displayName,
         avatar: currUser.photoURL ? currUser.photoURL : null,
+        // _id: user.uid,
+        // name: user.displayName,
+        // avatar: user.photoURL,
       }}
       inverted={false}
       showUserAvatar={true}

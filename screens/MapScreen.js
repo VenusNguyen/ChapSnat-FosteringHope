@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Colors from "../constants/Colors";
 import { StyleSheet, View, Text, LogBox } from "react-native";
 import * as Location from "expo-location";
-import MapView, { Callout, Marker } from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../constants/Colors";
@@ -10,8 +10,6 @@ import BottomSheet from "react-native-gesture-bottom-sheet";
 import { ListItem, Avatar } from "react-native-elements";
 import db from "../firebase";
 
-
-// import RBSheet from "react-native-raw-bottom-sheet";
 const LOS_ANGELES_REGION = {
   latitude: 34.0522,
   longitude: -118.2437,
@@ -19,7 +17,7 @@ const LOS_ANGELES_REGION = {
   longitudeDelta: 0.0421,
 };
 
-export default function MapScreen({navigation}) {
+export default function MapScreen({ navigation }) {
   const [currLocation, setCurrLocation] = useState(null);
   const mapView = useRef(null);
   const bottomSheet = useRef(null);
@@ -51,7 +49,6 @@ export default function MapScreen({navigation}) {
       let location = await Location.getCurrentPositionAsync({});
       setCurrLocation(location.coords);
     })();
-    LogBox.ignoreLogs(["Animated: 'useNativeDriver'"]);
   }, []);
 
   //a hacky way to get rid of the 'useNativeDriver' warning
@@ -81,7 +78,7 @@ export default function MapScreen({navigation}) {
         {currLocation ? (
           <Marker
             coordinate={currLocation}
-            image={require("../assets/avatar.png")}
+            image={require("../assets/chill.png")}
             onPress={() => bottomSheet.current.show()}
           />
         ) : null}
@@ -201,13 +198,13 @@ function EditBottomSheet(props) {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity style={{ ...styles.openButton }}
-            style={{...styles.openButton}}
+          <TouchableOpacity
+            style={{ ...styles.openButton }}
             onPress={() => {
               props.bottomSheet.current.close();
-              props.navigation.navigate("AIChat"); 
+              props.navigation.navigate("AIChat");
             }}
-            >
+          >
             <Text style={styles.textStyle}>AI Chat</Text>
             <Ionicons
               name="chatbubble-ellipses-outline"
